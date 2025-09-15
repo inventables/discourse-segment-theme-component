@@ -73,9 +73,9 @@ if (settings.track_users && currentUser && !userID) {
     api.container.lookup('store:main').find('user', currentUser.username).then((user) => {
         userID = ssoEnabled && settings.track_by_external_id ? user.external_id : user.id;
         if (settings.email_as_id) {
-            analytics.identify(user.email, {email: user.email, user_id: userID})
+            analytics.identify(user.email, {email: user.email, forum_id: user.id, external_id: userID})
         } else {
-            analytics.identify(userID, {email: user.email});
+            analytics.identify(userID, {email: user.email, forum_id: user.id, external_id: userID});
         }
     });
 }
